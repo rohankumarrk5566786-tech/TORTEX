@@ -87,8 +87,114 @@
 @media(max-width:800px){.hero-photo{animation:none}.product:hover .product-img img{transform:scale(1.05)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
+
+<style>
+/* ===== TORTEX MOTION GRAPHIC BACKGROUND ===== */
+body{position:relative;background:#fffdf9}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-5;pointer-events:none;
+  background:
+    radial-gradient(circle at 8% 18%,rgba(185,154,93,.13),transparent 24%),
+    radial-gradient(circle at 92% 42%,rgba(13,53,37,.10),transparent 25%),
+    radial-gradient(circle at 50% 92%,rgba(185,154,93,.08),transparent 28%);
+  animation:tortexBgPulse 10s ease-in-out infinite alternate;
+}
+.motion-bg{
+  position:fixed;inset:0;z-index:-4;pointer-events:none;overflow:hidden;
+}
+.motion-orb{
+  position:absolute;border-radius:50%;filter:blur(2px);
+  opacity:.42;mix-blend-mode:multiply;
+}
+.motion-orb.o1{width:260px;height:260px;left:-80px;top:20%;background:radial-gradient(circle at 35% 35%,#d6bc7d66,transparent 68%);animation:orbOne 16s ease-in-out infinite}
+.motion-orb.o2{width:360px;height:360px;right:-130px;top:48%;background:radial-gradient(circle at 40% 40%,#0b382633,transparent 68%);animation:orbTwo 20s ease-in-out infinite}
+.motion-orb.o3{width:220px;height:220px;left:45%;top:-100px;background:radial-gradient(circle at 50% 50%,#b9975740,transparent 68%);animation:orbThree 13s ease-in-out infinite}
+
+.motion-line{
+  position:absolute;width:420px;height:420px;border:1px solid #b9975725;border-radius:42%;
+  transform:rotate(28deg);right:-150px;top:15%;
+  animation:lineFloat 18s linear infinite;
+}
+.motion-line.l2{width:300px;height:520px;left:-160px;top:58%;right:auto;border-color:#0b38261c;transform:rotate(-25deg);animation-duration:24s}
+.motion-line.l3{width:500px;height:240px;left:38%;top:70%;border-color:#b9975718;animation-duration:20s}
+
+.particle{
+  position:absolute;width:5px;height:5px;border-radius:50%;
+  background:#b99757;opacity:.34;box-shadow:0 0 14px #b9975766;
+}
+.p1{left:12%;top:34%;animation:particleFloat 7s ease-in-out infinite}
+.p2{left:26%;top:78%;animation:particleFloat 9s ease-in-out -2s infinite}
+.p3{left:72%;top:22%;animation:particleFloat 8s ease-in-out -4s infinite}
+.p4{left:88%;top:72%;animation:particleFloat 10s ease-in-out -1s infinite}
+.p5{left:54%;top:42%;animation:particleFloat 6s ease-in-out -3s infinite}
+.p6{left:7%;top:88%;animation:particleFloat 11s ease-in-out -5s infinite}
+.p7{left:94%;top:14%;animation:particleFloat 8s ease-in-out -6s infinite}
+
+.tortex-watermark{
+  position:absolute;right:3%;top:25%;font-family:"Playfair Display",serif;
+  font-size:clamp(80px,14vw,190px);font-weight:700;letter-spacing:8px;
+  color:#0b3826;opacity:.018;transform:rotate(-12deg);
+  animation:watermarkFloat 12s ease-in-out infinite;
+}
+
+/* Animated section atmosphere */
+.section,.occasions,.about{position:relative}
+.section::after,.occasions::after,.about::after{
+  content:"";position:absolute;width:180px;height:180px;border-radius:50%;
+  border:1px solid #b9975720;right:2%;top:8%;pointer-events:none;
+  animation:ringSpin 22s linear infinite;
+}
+.about::after{left:2%;right:auto;top:12%;border-color:#0b38261b}
+
+/* Hero gets stronger cinematic moving light */
+.hero{position:relative}
+.hero::before{
+  content:"";position:absolute;inset:-30%;
+  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.055) 48%,transparent 56%);
+  transform:translateX(-40%);
+  animation:heroLight 9s ease-in-out infinite;
+  pointer-events:none;z-index:1;
+}
+.hero-copy,.hero-photo{position:relative;z-index:2}
+
+/* Keyframes */
+@keyframes tortexBgPulse{0%{opacity:.72;transform:scale(1)}100%{opacity:1;transform:scale(1.05)}}
+@keyframes orbOne{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(90px,-50px) scale(1.22)}}
+@keyframes orbTwo{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-90px,70px) scale(.82)}}
+@keyframes orbThree{0%,100%{transform:translate(0,0)}50%{transform:translate(130px,90px)}}
+@keyframes lineFloat{0%{transform:rotate(28deg) translate(0,0)}50%{transform:rotate(42deg) translate(-40px,35px)}100%{transform:rotate(28deg) translate(0,0)}}
+@keyframes particleFloat{0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.25}50%{transform:translate3d(25px,-35px,0) scale(1.7);opacity:.65}}
+@keyframes watermarkFloat{0%,100%{transform:rotate(-12deg) translateY(0)}50%{transform:rotate(-8deg) translateY(-18px)}}
+@keyframes ringSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes heroLight{0%,15%{transform:translateX(-50%)}55%,70%{transform:translateX(50%)}100%{transform:translateX(50%)}}
+
+@media(max-width:800px){
+  .motion-orb.o1{width:170px;height:170px}
+  .motion-orb.o2{width:220px;height:220px}
+  .motion-line{opacity:.5}
+  .tortex-watermark{font-size:75px;top:35%}
+}
+@media(prefers-reduced-motion:reduce){
+  .motion-bg *,.motion-orb,.motion-line,.particle,.tortex-watermark,
+  body::before,.hero::before,.section::after,.occasions::after,.about::after{animation:none!important}
+}
+</style>
 </head>
 <body>
+<div class="motion-bg" aria-hidden="true">
+  <div class="motion-orb o1"></div>
+  <div class="motion-orb o2"></div>
+  <div class="motion-orb o3"></div>
+  <div class="motion-line"></div>
+  <div class="motion-line l2"></div>
+  <div class="motion-line l3"></div>
+  <span class="particle p1"></span><span class="particle p2"></span>
+  <span class="particle p3"></span><span class="particle p4"></span>
+  <span class="particle p5"></span><span class="particle p6"></span>
+  <span class="particle p7"></span>
+  <div class="tortex-watermark">TORTEX</div>
+</div>
+
   <div class="cursor-glow"></div>
 
   <div class="topbar">
@@ -417,6 +523,23 @@ updateCart();
     });
     card.addEventListener("pointerleave",()=>card.style.transform="");
   });
+})();
+</script>
+
+<script>
+(function(){
+  const bg=document.querySelector(".motion-bg");
+  if(!bg)return;
+  let ticking=false;
+  window.addEventListener("scroll",()=>{
+    if(ticking)return;
+    ticking=true;
+    requestAnimationFrame(()=>{
+      const y=window.scrollY||0;
+      bg.style.transform=`translateY(${y*.018}px)`;
+      ticking=false;
+    });
+  },{passive:true});
 })();
 </script>
 </body>
